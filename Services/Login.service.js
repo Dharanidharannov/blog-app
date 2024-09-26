@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 class LoginService {
-    async loginUser(email, password) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL
-    console.log(apiUrl);
+  async loginUser(email, password) {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const login = {
       url: `${apiUrl}/auth/login`,
       method: 'POST',
@@ -13,22 +12,26 @@ class LoginService {
       },
       withCredentials: true
     };
-    console.log(login.body);
-    console.log(login.url);
 
     try {
-      const apiCall = await axios.post(login.url,login.body,login.withCredentials);
-      console.log(apiCall,"api check");
-      if (apiCall.data) {
-        return apiCall.data;
+      const response = await axios.post(login.url,login.body,login.withCredentials);
+
+      if (response.data && response.status === 200) {
+        return { 
+          message: "Login successful", data: response.data 
+        };
       } else {
-        return {  message: "Login failed, please try again." };
+        return {
+           message: "Login failed" 
+          };
       }
     } catch (error) {
-      console.error("Login error:", error.message);
-      return { message: "server error." };
+      console.log("Login error:", error.message);
+      return { 
+        message: "Not a user, Register first"
+       };
     }
   }
 }
 
-export default new  LoginService();
+export default new LoginService();
