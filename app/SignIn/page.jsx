@@ -12,10 +12,10 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await loginService.loginUser(email, password);
-
-    if (result.success) {
+    console.log(result,"check result");
+    if (result) {
       console.log("Login successful", result.message);
-      router.push('/User/BlogPage');
+      router.push('/User');
     } 
     else{
       console.log("login failed");

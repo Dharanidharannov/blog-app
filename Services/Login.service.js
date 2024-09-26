@@ -22,11 +22,11 @@ class LoginService {
       if (apiCall.data) {
         return apiCall.data;
       } else {
-        return { success: false, message: "Login failed, please try again." };
+        return {  message: "Login failed, please try again." };
       }
     } catch (error) {
       console.error("Login error:", error.message);
-      return { success: false, message: "server error." };
+      return { message: "server error." };
     }
   }
 }
