@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+
 
 
 function Signup(){
@@ -14,7 +14,9 @@ function Signup(){
     <input type="text" placeholder="username" className="ml-20 rounded p-2 mt-2"  /> <br />
     <label className="ml-14" htmlFor="">Email:</label><br />
     <input type="email" placeholder="email" className="ml-20 rounded p-2 mt-2"  />
-    <label htmlFor=""></label>
+    <label className="ml-14" htmlFor="">Password:</label><br />
+    <input type="text" placeholder="password" className="ml-20 rounded p-2 mt-2" /> <br />
+    <button className="bg-teal-400 rounded-xl p-2 mt-5 ml-32">Submit</button>
 </form>
                 </div>
         </div>
