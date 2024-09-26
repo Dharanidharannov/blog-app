@@ -2,12 +2,12 @@ import React from "react";
 import Login from "./SignIn/page";
 
 
-function Home(){
+function BlogPage(){
   return(
     <div>
-      <Login/>
+      <p>Blogpage</p>
     </div>
   )
 }
 
-export default Home;
+export default BlogPage;
