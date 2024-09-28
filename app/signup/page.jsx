@@ -1,8 +1,12 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
+import SignupService from "@/Services/Signup.service";
 
 
 
 function Signup(){
+    const [username,setUsername] = useState('')
+    const []
 
     return(
         <div>
@@ -16,7 +20,7 @@ function Signup(){
     <input type="email" placeholder="email" className="ml-20 rounded p-2 mt-2"  />
     <label className="ml-14" htmlFor="">Password:</label><br />
     <input type="text" placeholder="password" className="ml-20 rounded p-2 mt-2" /> <br />
-    <button className="bg-teal-400 rounded-xl p-2 mt-5 ml-32">Submit</button>
+    <button className="bg-teal-400 rounded-xl p-2 mt-5 ml-32 " type="submit">Submit</button>
 </form>
                 </div>
         </div>
