@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import SignupService from "@/Services/Signup.service";
 import { useRouter } from "next/navigation";
-import LoginService from "@/Services/Login.service"; // Create a LoginService for logging in
+import LoginService from "@/Services/Login.service";
 
 function Signup() {
     let [username, setUsername] = useState('');
@@ -25,14 +25,11 @@ function Signup() {
             if (result && result.message === "User registered successfully") {
                 setSuccessmsg(result.message);
                 
-                // After successful signup, attempt to log in
-                const loginResult = await LoginService.loginUser(email, password);
-                if (loginResult && loginResult.message === "Login successful") {
-                    // Navigate to SignIn page if login is successful
-                    router.push('/SignIn');
-                } else {
-                    setErrormsg(loginResult.message);
-                }
+            
+               
+            
+                 
+               
             } else {
                 setErrormsg(result.message);
             }
