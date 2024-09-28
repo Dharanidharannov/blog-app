@@ -25,7 +25,8 @@ class LoginService {
            message: "Login failed" 
           };
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.log("Login error:", error.message);
       return { 
         message: "Not a user, Register first"

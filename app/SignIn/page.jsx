@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import loginService from '../../Services/Login.service';
 
 function Login() {
@@ -30,9 +31,9 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login">
       <form onSubmit={handleLogin}>
-          <label htmlFor="email">Email</label>
+          <label >Email</label>
           <input
             type="email"
             placeholder="email"
@@ -40,7 +41,7 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label htmlFor="password">Password</label>
+          <label>Password</label>
           <input
             type="password"
             placeholder="password"
@@ -48,8 +49,9 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        {errorMsg && <p className="error-message">{errorMsg}</p>}
-        {successMsg && <p className="success-message">{successMsg}</p>}
+          <p>new user ? <Link href="/signup">Register here!</Link></p>
+        {errorMsg && <p>{errorMsg}</p>}
+        {successMsg && <p>{successMsg}</p>}
         <button type="submit" >Login</button>
       </form>
 
