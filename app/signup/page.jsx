@@ -24,6 +24,7 @@ function Signup() {
 
             if (result && result.message === "User registered successfully") {
                 setSuccessmsg(result.message);
+                router.push('/SignIn')
                 
             
                
