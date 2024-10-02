@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 class UserPageService {
   async blogPost(page = 1, limit = 10) {
@@ -6,15 +6,15 @@ class UserPageService {
     const endUrl = `${apiUrl}/blogs?page=${page}&limit=${limit}`;
     try {
       const response = await axios.get(endUrl);
-      if (response.status === 200 && response.data ) {
+      if (response.status === 200 && response.data) {
         return response.data.blogs;
       } else {
         console.error("Failed to fetch blogs");
-        return []; 
+        return [];
       }
     } catch (error) {
-      console.error("Error in fetching:", error); 
-      return []; 
+      console.error("Error in fetching:", error);
+      return [];
     }
   }
 }
