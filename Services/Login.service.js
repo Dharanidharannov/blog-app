@@ -15,8 +15,10 @@ class LoginService {
 
     try {
       const response = await axios.post(login.url,login.body,login.withCredentials);
+      console.log(response);
+      
 
-      if (response.data && response.status === 200) {
+      if (response.data ) {
         return { 
           message: "Login successful", data: response.data 
         };
@@ -27,7 +29,7 @@ class LoginService {
       }
     } 
     catch (error) {
-      console.log("Login error:", error.message);
+      console.log("Login error:", error);
       return { 
         message: "Not a user, Register first"
        };
