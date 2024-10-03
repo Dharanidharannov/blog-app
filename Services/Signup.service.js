@@ -4,6 +4,7 @@ class SignupService {
     async Signupuser(username, email, password) {
         const signupUrl = process.env.NEXT_PUBLIC_API_URL;
         console.log(signupUrl);
+        
 
         const signupData = {
             username: username.trim(),
