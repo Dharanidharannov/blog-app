@@ -17,6 +17,18 @@ class UserPageService {
       return [];
     }
   }
+
+   shortContent = (content) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = content;
+    const text = temp.textContent;
+
+    const words = text.split(/\s+/); 
+    if (words.length > 100) {
+      return words.slice(0, 100).join(" ") + "..."; 
+    }
+    return text; 
+  };
 }
 
 export default new UserPageService();
