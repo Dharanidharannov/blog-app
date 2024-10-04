@@ -24,7 +24,7 @@ function Navbar() {
 
         <ul className="md:flex space-x-9 text-black hidden">
           <li className="group">
-            <Link href="/" className="relative">
+            <Link href="/User" className="relative">
               Home
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
             </Link>

@@ -7,7 +7,7 @@ import Navbar from "../../Navbar/page";
 
 function BlogDetails() {
   const { id } = useParams(); 
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState([]);
 
   useEffect(() => {
     if (id) {
