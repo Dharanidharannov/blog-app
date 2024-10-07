@@ -11,7 +11,7 @@ class UserPageService {
       });
 
       if (blogData) {
-        return blogData; // blogData contains totalBlogs, currentPage, totalPages, and blogs array
+        return blogData; 
       } else {
         console.error("Failed to fetch blogs");
         return [];

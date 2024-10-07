@@ -5,20 +5,15 @@ class ApiService {
     url, 
     method = 'GET', 
     headers = {}, 
-    body, 
-    token // Accept token as an argument
+    body 
   }) {
     try {
       const config = {
         method,
         url: process.env.NEXT_PUBLIC_API_URL + url, 
-        headers: {
-          ...headers,
-          ...(token && { Authorization: `Bearer ${token}` }), // Add token to headers if provided
-        },
-        withCredentials: true, // Include credentials for cookie handling
+        headers,
+        withCredentials: true, 
       };
-
       if (body) {
         config.data = body; 
       }
