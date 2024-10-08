@@ -30,7 +30,8 @@ function Navbar() {
             </Link>
           </li>
           <li className="group">
-            <Link href="/about" className="relative">
+            <Link href="/addblog
+            " className="relative">
               Add Blog
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
             </Link>
