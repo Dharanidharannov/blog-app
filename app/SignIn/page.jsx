@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import loginService from '../../Services/Login.service';
+import loginService from '../../Services/Login.service'; 
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,27 +20,27 @@ function Login() {
       const result = await loginService.loginUser(email, password);
       if (result && result.message === 'Login successful') {
         setSuccessMsg(result.message);
-        router.push('/User');
+        router.push('/User'); 
       } else {
         setErrorMsg(result.message);
       }
     } catch (error) {
-      setErrorMsg('Please try again later');
+      console.error("Login error:", error); 
+      setErrorMsg('Please try again later'); 
     }
   };
 
   return (
     <div className="min-h-screen flex">
-     
       <div className="w-1/2 flex justify-center items-center bg-purple-100">
         <img
-          src= "/images/login-logo.png"
+          src="/images/login-logo.png" 
           alt="Illustration"
           className="h-96"
         />
       </div>
       <div className="w-1/2 flex flex-col justify-center items-center bg-custom-blue">
-        <div className="w-96 bg-white  rounded-3xl p-8">
+        <div className="w-96 bg-white rounded-3xl p-8">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Hello Again!</h2>
           <p className="text-gray-600 text-center mb-6">
             Welcome back, you've been missed!
@@ -67,7 +67,6 @@ function Login() {
                 required
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-              
             </div>
             <div className="mb-6 mt-6">
               <button

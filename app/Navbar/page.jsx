@@ -26,26 +26,26 @@ function Navbar() {
           <li className="group">
             <Link href="/User" className="relative">
               Home
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
             </Link>
           </li>
           <li className="group">
             <Link href="/addblog
             " className="relative">
               Add Blog
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
             </Link>
           </li>
           <li className="group">
             <Link href="/contact" className="relative">
               Contact
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
             </Link>
           </li>
           <li className="group">
             <Link href="/SignIn" className="relative">
               Login
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
             </Link>
           </li>
         </ul>

@@ -1,14 +1,11 @@
 import React from "react";
-import Link from "next/link";
+import BlogPage from "./User/page";
 
 
 function Home(){
   return(
     <div>
-      <nav>
-           <Link href="/signup" className="mr-20 ml-96">SignUp</Link>
-           <Link href="/SignIn">Login in</Link>
-      </nav>
+      <BlogPage/>
     </div>
   )
 }

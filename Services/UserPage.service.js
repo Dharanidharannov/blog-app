@@ -1,34 +1,28 @@
-import axios from "axios";
+import ApiService from './Api.service';
 
 class UserPageService {
-  async blogPost(page = 1, limit = 10) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const endUrl = `${apiUrl}/blogs?page=${page}&limit=${limit}`;
+  async getBlogs(page = 1, limit = 10) {
+    const url = `/blogs?page=${page}&limit=${limit}`;
+
     try {
-      const response = await axios.get(endUrl);
-      if (response.status === 200 && response.data) {
-        return response.data.blogs;
+      const blogData = await ApiService.ApiCall({
+        url,
+        method: 'GET',
+      });
+
+      if (blogData) {
+        return blogData; 
       } else {
         console.error("Failed to fetch blogs");
         return [];
       }
     } catch (error) {
-      console.error("Error in fetching:", error);
+      console.error("Error in fetching blogs:", error);
       return [];
     }
   }
 
-   shortContent = (content) => {
-    const temp = document.createElement("div");
-    temp.innerHTML = content;
-    const text = temp.textContent;
-
-    const words = text.split(/\s+/); 
-    if (words.length > 100) {
-      return words.slice(0, 100).join(" ") + "..."; 
-    }
-    return text; 
-  };
+  
 }
 
 export default new UserPageService();

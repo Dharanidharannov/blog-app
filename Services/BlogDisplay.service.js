@@ -1,33 +1,33 @@
-import axios from 'axios';
+import ApiService from './Api.service';
 
-class BlogdisplayService {
+class BlogDisplayService {
   async getBlogById(id) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const blog = {
-      url: `${apiUrl}/blogs/${id}`,
-      method: 'GET',
-      withCredentials: true
-    };
+    const url = `/blogs/${id}`; 
 
     try {
-      const response = await axios.get(blog.url,blog.withCredentials);
-      if (response.status === 200 && response.data) {
+      const blogData = await ApiService.ApiCall({
+        url,
+        method: 'GET',
+        withCredentials: true,
+      });
+
+      if (blogData) {
         return {
           message: "Blog fetched successfully",
-          data: response.data
+          data: blogData,
         };
       } else {
         return {
-          message: "Failed to fetch blog details"
+          message: "Failed to fetch blog details",
         };
       }
     } catch (error) {
       console.error("Error in fetching blog details:", error);
       return {
-        message: "Error in fetching blog details"
+        message: "Error in fetching blog details",
       };
     }
   }
 }
 
-export default new BlogdisplayService();
+export default new BlogDisplayService();
