@@ -53,9 +53,6 @@ function BlogDetails() {
         />
         <div className="mt-4">
           <p className="font-semibold">By: {blog.user?.username}</p>
-          <p className="text-sm text-gray-500">
-            {new Date(blog.createdAt).toLocaleDateString()}
-          </p>
         </div>
       </div>
     </div>

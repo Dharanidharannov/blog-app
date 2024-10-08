@@ -1,4 +1,6 @@
+
 import ApiService from './Api.service';
+
 
 class BlogDisplayService {
   async getBlogById(id) {
@@ -9,6 +11,7 @@ class BlogDisplayService {
         url,
         method: 'GET',
         withCredentials: true,
+        
       });
 
       if (blogData) {
