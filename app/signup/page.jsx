@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import SignupService from "@/Services/Signup.service";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Image from "next/image"; 
 
 function Signup() {
   let [username, setUsername] = useState("");
@@ -43,8 +43,8 @@ function Signup() {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="flex bg-white rounded-lg shadow-lg w-full max-w-4xl">
        
-        <div className="w-1/2 p-10 bg-purple-100 flex justify-center items-center">
-          
+        <div className="w-1/2 p-10 bg-blue-100 flex justify-center items-center">
+            <Image src='/images/signup image.jpg' width={800} height={50} className="h-fix w-96"/>
         </div>
 
         <div className="w-1/2 p-10">
