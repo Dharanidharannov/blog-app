@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -60,24 +60,24 @@ function Navbar() {
 
         <ul className="md:flex space-x-9 text-black hidden">
           <li className="group">
-            <Link href="/User" className="relative">
+            <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400">
               Home
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
+             
             </Link>
           </li>
           <li className="group">
             <Link href="/about" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
           </li>
           <li className="group">
-            <Link href="/contact" className="relative">
+            <Link href="/contact" className="relative transition duration-300 ease-in-out hover:text-gray-400">
               Contact
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
+             
             </Link>
           </li>
           <li className="group">
-            <Link href="/SignIn" className="relative">
+            <Link href="/SignIn" className="relative transition duration-300 ease-in-out hover:text-gray-400">
               Login
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
+             
             </Link>
           </li>
         </ul>

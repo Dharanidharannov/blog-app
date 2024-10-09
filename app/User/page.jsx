@@ -5,7 +5,8 @@ import BlogService from "@/Services/UserPage.service";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "../Navbar/page";
-import { ClipLoader } from "react-spinners"; 
+import { ClipLoader } from "react-spinners";
+
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
