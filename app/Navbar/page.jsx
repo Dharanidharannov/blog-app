@@ -65,9 +65,6 @@ function Navbar() {
           <li className="group">
             <Link href="/about" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
           </li>
-          <li className="group">
-            <Link href="/contact" className="relative transition duration-300 ease-in-out hover:text-gray-400">Contact</Link>
-          </li>
           <li className="relative">
             {isLoggedIn ? (
               <div className="flex items-center">
@@ -87,7 +84,7 @@ function Navbar() {
                 )}
               </div>
             ) : (
-              <Link href="/SignIn" onClick={handleLoginClick} className="hover:text-white transition duration-300 ease-in-out">Login</Link>
+              <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400">Login</Link>
             )}
           </li>
         </ul>
@@ -98,8 +95,8 @@ function Navbar() {
             <h2 className="text-lg font-semibold mb-4 text-black">Confirm Logout</h2>
             <p className="mb-6 text-black">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-4">
-              <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">OK</button>
-              <button onClick={closeLogoutModal} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-400">Cancel</button>
+              <button onClick={handleLogout} className=" text-red-500 px-4 py-2 rounded-xl hover:bg-red-100">OK</button>
+              <button onClick={closeLogoutModal} className=" text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-100">Cancel</button>
             </div>
           </div>
         </div>
