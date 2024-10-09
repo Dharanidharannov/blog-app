@@ -66,7 +66,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="group">
-            <Link href="/about" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
+            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
           </li>
           <li className="group">
             <Link href="/contact" className="relative transition duration-300 ease-in-out hover:text-gray-400">

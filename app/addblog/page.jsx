@@ -3,7 +3,8 @@
 import AddBlogService from '@/Services/AddBlog.service';
 import { useState } from 'react';
 import dynamic from 'next/dynamic'; 
-import 'react-quill/dist/quill.snow.css'; 
+import 'react-quill/dist/quill.snow.css';
+ 
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -34,8 +35,10 @@ function Addblog() {
 
   return (
     <div>
-      <h1 className="mb-3 bg-teal-400">Add a New Blog</h1>
-      <form onSubmit={handleSubmit} className="p-10">
+     <div className="mb-3 bg-black text-white h-12">
+      <h1 className="p-3">Add new blog</h1>
+     </div>
+      <form onSubmit={handleSubmit} className="p-10 ml-96 bg-pink-500 w-fit rounded-xl">
         <div>
           <label className ="font-bold">Title:</label> <br />
           <input 
@@ -88,7 +91,7 @@ function Addblog() {
         </div> 
         <br />
         
-        <button type="submit" className="bg-teal-400 rounded-xl p-2">Submit</button>
+        <button type="submit" className="bg-teal-400 rounded-xl p-2 ml-40">Submit</button>
       </form>
       {message && <p>{message}</p>}
     </div>
