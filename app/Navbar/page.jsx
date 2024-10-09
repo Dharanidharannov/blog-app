@@ -22,11 +22,11 @@ function Navbar() {
           />
         </div>
 
-        <ul className="md:flex space-x-9 text-black hidden">
+        <ul className="md:flex space-x-12 text-black hidden">
           <li className="group">
             <Link href="/User" className="relative">
               Home
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all  duration-700 group-hover:w-full"></span>
             </Link>
           </li>
           <li className="group">
@@ -47,7 +47,13 @@ function Navbar() {
               Login
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
             </Link>
-          </li>
+            </li>
+            {/* <li className="group">
+            <Link href='/signup' className="relative ">
+            Signup
+            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-700 group-hover:w-full"></span>
+            </Link>
+          </li> */}
         </ul>
       </div>
     </nav>

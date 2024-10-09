@@ -39,7 +39,7 @@ function BlogDetails() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar  />
       <div className="p-4">
         <h1 className="text-3xl font-bold">{blog.title}</h1>
         <img

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import react,{useState} from "react";
 import SignupService from "@/Services/Signup.service";
 import { useRouter } from "next/navigation";
 import Image from "next/image"; 
@@ -53,7 +53,7 @@ function Signup() {
             Welcome to MyblogApp!
           </p>
 
-          <form onSubmit={handlesignup}>
+          <form onSubmit={handlesignup} >
         
             <div className="mb-4">
               <label className="block text-sm mb-2">Username</label>
