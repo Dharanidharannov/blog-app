@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar({ onSearch }) {  // Add onSearch prop
+function Navbar({ onSearch }) {  
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -44,7 +44,7 @@ function Navbar({ onSearch }) {  // Add onSearch prop
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    onSearch(e.target.value);  // Call onSearch prop with search query
+    onSearch(e.target.value); 
   };
 
   return (
@@ -59,7 +59,7 @@ function Navbar({ onSearch }) {  // Add onSearch prop
             className="w-80 px-4 py-2 rounded-2xl text-black bg-slate-200"
             placeholder="Search Blogs..."
             value={searchQuery}
-            onChange={handleSearchChange}  // Update on typing
+            onChange={handleSearchChange} 
           />
         </div>
 
