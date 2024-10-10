@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function Navbar({ onSearch }) {  
@@ -65,13 +66,13 @@ function Navbar({ onSearch }) {
 
         <ul className="md:flex space-x-9 text-black hidden">
           <li className="group">
-            <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400">
+            <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400 text-white">
               Home
              
             </Link>
           </li>
           <li className="group">
-            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
+            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400  text-white">Add Blog</Link>
           </li>
           <li className="relative">
             {isLoggedIn ? (
@@ -92,7 +93,7 @@ function Navbar({ onSearch }) {
                 )}
               </div>
             ) : (
-              <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400">Login</Link>
+              <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400  text-white">Login</Link>
             )}
 
           </li>
