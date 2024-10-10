@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar() {
+function Navbar({ onSearch }) {  // Add onSearch prop
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -42,6 +42,11 @@ function Navbar() {
     setShowLogoutModal(false);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    onSearch(e.target.value);  // Call onSearch prop with search query
+  };
+
   return (
     <nav className="bg-gray-950 px-8 py-4 text-white">
       <div className="container mx-auto flex items-center justify-between">
@@ -54,7 +59,7 @@ function Navbar() {
             className="w-80 px-4 py-2 rounded-2xl text-black bg-slate-200"
             placeholder="Search Blogs..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchChange}  // Update on typing
           />
         </div>
 
@@ -67,7 +72,7 @@ function Navbar() {
           </li>
           <li className="relative">
             {isLoggedIn ? (
-              <div className="flex items-center">
+              <div className="md:flex hidden items-center ">
                 <div onClick={toggleDropdown} className="cursor-pointer rounded-full bg-gray-600 h-8 w-8 flex items-center justify-center">
                   <FontAwesomeIcon icon={faUser} className="text-white" />
                 </div>
