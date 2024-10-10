@@ -10,8 +10,11 @@ import { ClipLoader } from "react-spinners";
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
+  const [filteredBlogs, setFilteredBlogs] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1); 
   const router = useRouter();
 
   useEffect(() => {
@@ -20,22 +23,26 @@ function BlogPage() {
 
     const getBlogs = async () => {
       try {
-        const blogData = await BlogService.getBlogs();
+        const blogData = await BlogService.getBlogs(currentPage); 
         if (blogData && Array.isArray(blogData.blogs)) {
           setBlogs(blogData.blogs);
+          setFilteredBlogs(blogData.blogs); 
+          setTotalPages(blogData.totalPages); 
         } else {
           setBlogs([]);
+          setFilteredBlogs([]);
         }
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
         setBlogs([]);
+        setFilteredBlogs([]);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     getBlogs();
-  }, []);
+  }, [currentPage]);
 
   const handleBlogClick = (blogId) => {
     if (isLoggedIn) {
@@ -45,15 +52,37 @@ function BlogPage() {
     }
   };
 
+  const handleSearch = (query) => {
+    const searchTerm = query.toLowerCase();
+    const filtered = blogs.filter(
+      (blog) =>
+        blog.title.toLowerCase().includes(searchTerm) ||
+        blog.category.toLowerCase().includes(searchTerm)
+    );
+    setFilteredBlogs(filtered); 
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
   return (
     <div>
-      <Navbar />
+      <Navbar onSearch={handleSearch} />
       <div className="my-8 mt-16">
-      <ul className="flex justify-center space-x-28 text-center">
+        <ul className="flex justify-center space-x-28 text-center">
           <li className="bg-fuchsia-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
             <Link href="/category/books">Books</Link>
           </li>
-          <li className="bg-teal-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
+          <li className="bg-teal-200 rounded-2xl flex items-center justify-center " style={{ width: "150px", height: "35px" }}>
             <Link href="/category/technology">Technology</Link>
           </li>
           <li className="bg-blue-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
@@ -70,12 +99,12 @@ function BlogPage() {
 
       {loading ? (
         <div className="flex items-center justify-center w-full h-[70vh]">
-          <ClipLoader color="#3b82f6" size={50} /> 
+          <ClipLoader color="#3b82f6" size={50} />
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 px-20 mt-16">
-          {Array.isArray(blogs) && blogs.length > 0 ? (
-            blogs.map((blog) => (
+          {Array.isArray(filteredBlogs) && filteredBlogs.length > 0 ? (
+            filteredBlogs.map((blog) => (
               <div
                 key={blog._id}
                 onClick={() => handleBlogClick(blog._id)}
@@ -108,10 +137,32 @@ function BlogPage() {
               </div>
             ))
           ) : (
-            <p>No blogs available.</p>
+            <p className="text-center col-span-4">No blogs found matching your search.</p>
           )}
         </div>
       )}
+      <div className="flex justify-center items-center space-x-4 my-8">
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          className={`px-2 py-1 text-white bg-blue-400 rounded-lg  ${
+            currentPage === 1 
+          }`}
+        >
+          Previous
+        </button>
+        <span className=" ">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+          className={`px-2 py-1 text-white bg-blue-400 rounded-lg    ${
+            currentPage === totalPages }` }
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

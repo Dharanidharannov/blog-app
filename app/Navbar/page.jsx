@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 
 
-function Navbar() {
+function Navbar({ onSearch }) {  
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -42,6 +42,11 @@ function Navbar() {
     setShowLogoutModal(false);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    onSearch(e.target.value); 
+  };
+
   return (
     <nav className="bg-gray-950 px-8 py-4 text-white">
       <div className="container mx-auto flex items-center justify-between">
@@ -54,7 +59,7 @@ function Navbar() {
             className="w-80 px-4 py-2 rounded-2xl text-black bg-slate-200"
             placeholder="Search Blogs..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchChange} 
           />
         </div>
 
@@ -68,17 +73,28 @@ function Navbar() {
           <li className="group">
             <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
           </li>
-          <li className="group">
-            <Link href="/contact" className="relative transition duration-300 ease-in-out hover:text-gray-400">
-              Contact
-             
-            </Link>
-          </li>
-          <li className="group">
-            <Link href="/SignIn" className="relative transition duration-300 ease-in-out hover:text-gray-400">
-              Login
-             
-            </Link>
+          <li className="relative">
+            {isLoggedIn ? (
+              <div className="md:flex hidden items-center ">
+                <div onClick={toggleDropdown} className="cursor-pointer rounded-full bg-gray-600 h-8 w-8 flex items-center justify-center">
+                  <FontAwesomeIcon icon={faUser} className="text-white" />
+                </div>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-48 w-48 bg-white text-black rounded-xl z-10">
+                    <div className="px-4 py-3 border-b border-gray-300 cursor-pointer">
+                      <Link href="/profile">Profile</Link>
+                    </div>
+                    <div className="px-4 py-3 border-b border-gray-200 cursor-pointer">
+                      <Link href="/about">Add Blog</Link>
+                    </div>
+                    <div onClick={openLogoutModal} className="px-4 py-3 cursor-pointer">Logout</div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400">Login</Link>
+            )}
+
           </li>
         </ul>
       </div>
