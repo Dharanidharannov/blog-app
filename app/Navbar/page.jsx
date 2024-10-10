@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+
 
 function Navbar({ onSearch }) {  
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,12 +63,15 @@ function Navbar({ onSearch }) {
           />
         </div>
 
-        <ul className="md:flex space-x-9 text-white hidden">
+        <ul className="md:flex space-x-9 text-black hidden">
           <li className="group">
-            <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400">Home</Link>
+            <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400">
+              Home
+             
+            </Link>
           </li>
           <li className="group">
-            <Link href="/about" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
+            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400">Add Blog</Link>
           </li>
           <li className="relative">
             {isLoggedIn ? (
@@ -91,6 +94,7 @@ function Navbar({ onSearch }) {
             ) : (
               <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400">Login</Link>
             )}
+
           </li>
         </ul>
       </div>

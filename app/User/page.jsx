@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "../Navbar/page";
 import { ClipLoader } from "react-spinners";
 
+
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState([]); 
