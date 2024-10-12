@@ -77,25 +77,6 @@ function BlogPage() {
   return (
     <div>
       <Navbar onSearch={handleSearch} />
-      <div className="my-8 mt-16">
-        <ul className="flex justify-center space-x-28 text-center">
-          <li className="bg-fuchsia-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
-            <Link href="/category/books">Books</Link>
-          </li>
-          <li className="bg-teal-200 rounded-2xl flex items-center justify-center " style={{ width: "150px", height: "35px" }}>
-            <Link href="/category/technology">Technology</Link>
-          </li>
-          <li className="bg-blue-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
-            <Link href="/category/entertainment">Entertainment</Link>
-          </li>
-          <li className="bg-pink-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
-            <Link href="/category/sports">Sports</Link>
-          </li>
-          <li className="bg-red-200 rounded-2xl flex items-center justify-center" style={{ width: "150px", height: "35px" }}>
-            <Link href="/category/facts">Facts</Link>
-          </li>
-        </ul>
-      </div>
 
       {loading ? (
         <div className="flex items-center justify-center w-full h-[70vh]">
@@ -108,7 +89,7 @@ function BlogPage() {
               <div
                 key={blog._id}
                 onClick={() => handleBlogClick(blog._id)}
-                className="bg-white rounded-2xl overflow-hidden flex flex-col items-center p-4 transform transition-all hover:scale-105 cursor-pointer"
+                className="bg-white rounded-2xl overflow-hidden flex flex-col items-center shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer"
               >
                 <div className="w-full h-48 overflow-hidden rounded-lg">
                   <img
@@ -137,7 +118,7 @@ function BlogPage() {
               </div>
             ))
           ) : (
-            <p className="text-center col-span-4">No blogs found matching your search.</p>
+            <p className="text-center col-span-4">No blogs found.</p>
           )}
         </div>
       )}

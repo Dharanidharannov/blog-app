@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie'; 
 
 class LoginService {
   async loginUser(email, password) {
@@ -9,7 +10,8 @@ class LoginService {
       data: {
         email,
         password,
-      }
+      },
+      withCredentials: true,
     };
 
     try {

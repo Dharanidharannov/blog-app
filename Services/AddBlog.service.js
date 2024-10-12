@@ -11,13 +11,12 @@ class AddblogService {
       headers: {
         'Content-Type': 'application/json',
       },
-      data: blogData
+      data: blogData,
     };
 
     try {
       const response = await axios.post(blogUpload.url, blogUpload.data, {
         withCredentials: blogUpload.withCredentials,
-        headers: blogUpload.headers,
       });
 
       if (response.status === 200 && response.data) {

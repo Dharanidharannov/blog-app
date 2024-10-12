@@ -83,10 +83,10 @@ function Navbar({ onSearch }) {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-48 w-48 bg-white text-black rounded-xl z-10">
                     <div className="px-4 py-3 border-b border-gray-300 cursor-pointer">
-                      <Link href="/profile">Profile</Link>
+                      <Link href="/Profile">Profile</Link>
                     </div>
                     <div className="px-4 py-3 border-b border-gray-200 cursor-pointer">
-                      <Link href="/about">Add Blog</Link>
+                      <Link href="/addblog">Add Blog</Link>
                     </div>
                     <div onClick={openLogoutModal} className="px-4 py-3 cursor-pointer">Logout</div>
                   </div>
