@@ -38,18 +38,15 @@ function Login() {
   };
 
   return (
-    <div className="flex  items-center justify-center h-screen bg-gray-100 ">
+    <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="flex bg-white rounded-lg shadow-lg w-full max-w-4xl">
-        
-        <div className="md:w-1/2 p-20 bg-blue-100  hidden md:flex justify-center items-center">
-          <Image src="/images/login-logo.png" width={800} height={50} className="h-fix w-96 " alt="Login Illustration" />
+        <div className="md:w-1/2 p-20 bg-blue-100 hidden md:flex justify-center items-center">
+          <Image src="/images/login-logo.png" width={800} height={50} className="h-fix w-96" alt="Login Illustration" />
         </div>
 
-        <div className="md:w-1/2    p-20">
+        <div className="md:w-1/2 p-20">
           <h2 className="text-2xl font-bold mb-5 text-center">Hello Again!</h2>
-          <p className="text-center mb-10 text-gray-600">
-            Welcome back, you've been missed!
-          </p>
+          <p className="text-center mb-10 text-gray-600">Welcome back, you've been missed!</p>
 
           <form onSubmit={handleLogin}>
             <div className="mb-4">
@@ -95,9 +92,7 @@ function Login() {
 
           <p className="text-center mt-5">
             Don’t have an account?{" "}
-            <a href="/signup" className="text-blue-500">
-              Sign Up !
-            </a>
+            <a href="/signup" className="text-blue-500">Sign Up!</a>
           </p>
         </div>
       </div>

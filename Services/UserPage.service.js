@@ -1,7 +1,7 @@
 import ApiService from './Api.service';
 
 class UserPageService {
-  async getBlogs(page = 1, limit = 10) {
+  async getBlogs(page = 1, limit = 8 ) {
     const url = `/blogs?page=${page}&limit=${limit}`;
 
     try {

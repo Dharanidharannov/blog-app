@@ -1,19 +1,17 @@
-
+import Cookies from 'js-cookie';
 import ApiService from './Api.service';
-
 
 class BlogDisplayService {
   async getBlogById(id) {
-    const url = `/blogs/${id}`; 
-
+    const url = `/blogs/${id}`;
     try {
       const blogData = await ApiService.ApiCall({
         url,
         method: 'GET',
+        headers: {
+        },
         withCredentials: true,
-        
       });
-
       if (blogData) {
         return {
           message: "Blog fetched successfully",

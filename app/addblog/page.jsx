@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
 import AddBlogService from '@/Services/AddBlog.service';
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import dynamic from 'next/dynamic'; 
 import 'react-quill/dist/quill.snow.css';
-
-
-
+import Navbar from '../Navbar/page';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -16,6 +15,7 @@ function Addblog() {
   const [categories, setCategories] = useState('');
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,12 +23,13 @@ function Addblog() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);  
-    formData.append('categories', categories);
+    formData.append('category', categories);
     formData.append('image', image);
 
     try {
       const response = await AddBlogService.uploadBlog(formData);
       setMessage(response.message);
+      router.push("/User");
     } catch (error) {
       setMessage('Error in uploading blog.');
     }
@@ -36,65 +37,63 @@ function Addblog() {
 
   return (
     <div>
-     <div className="mb-3 bg-black text-white h-12">
-      <h1 className="p-3">Add new blog</h1>
-     </div>
-      <form onSubmit={handleSubmit} className="p-10 ml-96 bg-pink-500 w-fit rounded-xl">
-        <div>
-          <label className ="font-bold">Title:</label> <br />
-          <input 
-          className="rounded w-72 p-1   "
-            type="text" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            required 
-          />
-        </div> 
-        <br />
-        
-        <div>
-          <label>Content</label>
-          <ReactQuill
-          className = "p-2 w-96" 
-            value={content} 
-            onChange={setContent}  
-            required 
-            placeholder="Write your content here..."
-          />
-        </div> 
-        <br />
-        
-        <div>
-          <label>Categories</label> <br />
-          <select 
-          className ="ml-10 mt-2"
-            value={categories} 
-            onChange={(e) => setCategories(e.target.value)} 
-            required
-          >
-            <option value="">Select a category</option>
-            <option value="books">Books</option>
-            <option value="technology">Technology</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="sports">Sports</option>
-            <option value="facts">Facts</option>
-          </select>
-        </div> 
-        <br />
-        
-        <div>
-          <label>Image</label> <br />
-          <input 
-            type="file" 
-            onChange={(e) => setImage(e.target.files[0])} 
-            required 
-          />
-        </div> 
-        <br />
-        
-        <button type="submit" className="bg-teal-400 rounded-xl p-2 ml-40">Submit</button>
-      </form>
-      {message && <p>{message}</p>}
+      <Navbar />
+      <div className='container mx-auto py-10 px-96'>
+        <div className=" p-10">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="font-bold">Title:</label>
+              <input 
+                className="mt-2 rounded border border-gray-300 w-full p-2"
+                type="text" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+                required 
+              />
+            </div>
+            <div className="mb-4">
+              <label className="font-bold">Categories:</label>
+              <select 
+                className="mt-2 rounded border border-gray-300 w-full p-2"
+                value={categories} 
+                onChange={(e) => setCategories(e.target.value)} 
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="books">Books</option>
+                <option value="technology">Technology</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="sports">Sports</option>
+                <option value="facts">Facts</option>
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label className="font-bold">Content:</label>
+              <ReactQuill
+                className="mt-2 mb-4"
+                value={content} 
+                onChange={setContent}  
+                required 
+                placeholder="Write your content here..."
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="font-bold mr-2">Image:</label>
+              <input 
+                type="file" 
+                className="mt-2 border border-gray-300 p-2 rounded" 
+                onChange={(e) => setImage(e.target.files[0])} 
+                required 
+              />
+            </div>
+
+            <button type="submit" className="bg-black hover:bg-gray-500 rounded-xl px-4 py-1  text-white transition duration-200">Submit</button>
+          </form>
+          {message && <p className="mt-4 text-center text-red-500">{message}</p>}
+        </div>
+      </div>
     </div>
   );
 }
