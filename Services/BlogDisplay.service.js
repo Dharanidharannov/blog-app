@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+
 import ApiService from './Api.service';
 
 class BlogDisplayService {
