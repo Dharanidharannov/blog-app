@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "../Navbar/page";
 import { ClipLoader } from "react-spinners";
-
+import Cookies from "js-cookie"; 
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -18,8 +18,8 @@ function BlogPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = sessionStorage.getItem("isLoggedIn");
-    setIsLoggedIn(loggedInUser === "true");
+    const token = Cookies.get("token");
+    setIsLoggedIn(!!token);
 
     const getBlogs = async () => {
       try {
@@ -52,14 +52,10 @@ function BlogPage() {
     }
   };
 
-  const handleSearch = (query) => {
-    const searchTerm = query.toLowerCase();
-    const filtered = blogs.filter(
-      (blog) =>
-        blog.title.toLowerCase().includes(searchTerm) ||
-        blog.category.toLowerCase().includes(searchTerm)
-    );
-    setFilteredBlogs(filtered); 
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
   };
 
   const nextPage = () => {
@@ -68,10 +64,12 @@ function BlogPage() {
     }
   };
 
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
+  const handleSearch = (query) => {
+    const filtered = blogs.filter(blog => 
+      blog.title.toLowerCase().includes(query.toLowerCase()) || 
+      blog.category.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredBlogs(filtered);
   };
 
   return (
@@ -126,20 +124,17 @@ function BlogPage() {
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className={`px-2 py-1 text-white bg-blue-400 rounded-lg  ${
-            currentPage === 1 
-          }`}
+          className={`px-2 py-1 text-white bg-blue-400 rounded-lg ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           Previous
         </button>
-        <span className=" ">
+        <span>
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className={`px-2 py-1 text-white bg-blue-400 rounded-lg    ${
-            currentPage === totalPages }` }
+          className={`px-2 py-1 text-white bg-blue-400 rounded-lg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           Next
         </button>

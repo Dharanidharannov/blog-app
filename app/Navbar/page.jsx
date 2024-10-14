@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
+import { userId } from '../SignIn/page';
 
-
-function Navbar({ onSearch }) {  
+function Navbar({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,8 +16,8 @@ function Navbar({ onSearch }) {
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = sessionStorage.getItem("isLoggedIn");
-    setIsLoggedIn(loggedInUser === "true");
+    const token = Cookies.get("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   const handleLoginClick = () => {
@@ -33,7 +34,7 @@ function Navbar({ onSearch }) {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("isLoggedIn");
+    Cookies.remove("token"); 
     setIsLoggedIn(false);
     setShowLogoutModal(false);
     router.push("/SignIn");
@@ -45,8 +46,12 @@ function Navbar({ onSearch }) {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    onSearch(e.target.value); 
+    onSearch(e.target.value);
   };
+  const handleProfileClick = () => {
+    console.log("userId:",userId);
+    router.push(`/Profile/${userId}`);
+  }
 
   return (
     <nav className="bg-gray-950 px-8 py-4 text-white">
@@ -60,19 +65,19 @@ function Navbar({ onSearch }) {
             className="w-80 px-4 py-2 rounded-2xl text-black bg-slate-200"
             placeholder="Search Blogs..."
             value={searchQuery}
-            onChange={handleSearchChange} 
+            onChange={handleSearchChange}
           />
         </div>
-
         <ul className="md:flex space-x-9 text-black hidden">
           <li className="group">
             <Link href="/User" className="relative transition duration-300 ease-in-out hover:text-gray-400 text-white">
               Home
-             
             </Link>
           </li>
           <li className="group">
-            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400  text-white">Add Blog</Link>
+            <Link href="/addblog" className="relative transition duration-300 ease-in-out hover:text-gray-400  text-white">
+              Add Blog
+            </Link>
           </li>
           <li className="relative">
             {isLoggedIn ? (
@@ -83,7 +88,7 @@ function Navbar({ onSearch }) {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-48 w-48 bg-white text-black rounded-xl z-10">
                     <div className="px-4 py-3 border-b border-gray-300 cursor-pointer">
-                      <Link href="/Profile">Profile</Link>
+                    <div onClick={handleProfileClick} className=" cursor-pointer">Profile</div>
                     </div>
                     <div className="px-4 py-3 border-b border-gray-200 cursor-pointer">
                       <Link href="/addblog">Add Blog</Link>
@@ -93,9 +98,10 @@ function Navbar({ onSearch }) {
                 )}
               </div>
             ) : (
-              <Link href="/SignIn" onClick={handleLoginClick} className=" transition duration-300 ease-in-out hover:text-gray-400  text-white">Login</Link>
+              <Link href="/SignIn" onClick={handleLoginClick} className="transition duration-300 ease-in-out hover:text-gray-400 text-white">
+                Login
+              </Link>
             )}
-
           </li>
         </ul>
       </div>
@@ -105,8 +111,8 @@ function Navbar({ onSearch }) {
             <h2 className="text-lg font-semibold mb-4 text-black">Confirm Logout</h2>
             <p className="mb-6 text-black">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-4">
-              <button onClick={handleLogout} className=" text-red-500 px-4 py-2 rounded-xl hover:bg-red-100">OK</button>
-              <button onClick={closeLogoutModal} className=" text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-100">Cancel</button>
+              <button onClick={handleLogout} className="text-red-500 px-4 py-2 rounded-xl hover:bg-red-100">OK</button>
+              <button onClick={closeLogoutModal} className="text-gray-800 px-4 py-2 rounded-xl hover:bg-gray-100">Cancel</button>
             </div>
           </div>
         </div>
