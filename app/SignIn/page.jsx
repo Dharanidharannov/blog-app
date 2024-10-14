@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Cookies from "js-cookie";
 import loginService from "@/Services/Login.service";
 import { ClipLoader } from "react-spinners";
 
@@ -23,8 +24,9 @@ function Login() {
     try {
       const result = await loginService.loginUser(email, password);
       if (result && result.message === "Login successful") {
-        sessionStorage.setItem("isLoggedIn", "true");
+        Cookies.set("token", result.token, { expires: 1 });
         setSuccessMsg(result.message);
+        const userId = result.data.user._id;
         router.push("/User");
       } else {
         setErrorMsg(result.message);

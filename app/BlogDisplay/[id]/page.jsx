@@ -17,9 +17,6 @@ function BlogDetails() {
         setLoading(true);
 
         const blogData = await BlogDisplayService.getBlogById(id);
-
-        console.log("Blog Data:", blogData);
-
         if (blogData && blogData.data) {
           setBlog(blogData.data);
           setError('');
