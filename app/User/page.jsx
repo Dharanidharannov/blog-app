@@ -2,19 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import BlogService from "@/Services/UserPage.service";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "../Navbar/page";
 import { ClipLoader } from "react-spinners";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
-  const [filteredBlogs, setFilteredBlogs] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [totalPages, setTotalPages] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const router = useRouter();
 
   useEffect(() => {
@@ -22,20 +20,18 @@ function BlogPage() {
     setIsLoggedIn(!!token);
 
     const getBlogs = async () => {
+      setLoading(true);
       try {
-        const blogData = await BlogService.getBlogs(currentPage); 
+        const blogData = await BlogService.getBlogs(currentPage);
         if (blogData && Array.isArray(blogData.blogs)) {
           setBlogs(blogData.blogs);
-          setFilteredBlogs(blogData.blogs); 
-          setTotalPages(blogData.totalPages); 
+          setTotalPages(blogData.totalPages);
         } else {
           setBlogs([]);
-          setFilteredBlogs([]);
         }
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
         setBlogs([]);
-        setFilteredBlogs([]);
       } finally {
         setLoading(false);
       }
@@ -64,17 +60,9 @@ function BlogPage() {
     }
   };
 
-  const handleSearch = (query) => {
-    const filtered = blogs.filter(blog => 
-      blog.title.toLowerCase().includes(query.toLowerCase()) || 
-      blog.category.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredBlogs(filtered);
-  };
-
   return (
     <div>
-      <Navbar onSearch={handleSearch} />
+      <Navbar />
 
       {loading ? (
         <div className="flex items-center justify-center w-full h-[70vh]">
@@ -82,8 +70,8 @@ function BlogPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 px-20 mt-16">
-          {Array.isArray(filteredBlogs) && filteredBlogs.length > 0 ? (
-            filteredBlogs.map((blog) => (
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
               <div
                 key={blog._id}
                 onClick={() => handleBlogClick(blog._id)}
@@ -104,13 +92,18 @@ function BlogPage() {
                     {blog.content.replace(/(<([^>]+)>)/gi, "").substring(0, 100)}
                     ...
                   </p>
-                  <div className="justify-between items-center mt-3">
-                    <p className="mt-2 text-sm font-semibold">
-                      By: {blog.user.username}
-                    </p>
-                    <p className="mt-1 text-gray-400 text-sm">
-                      {blog.user.email}
-                    </p>
+                  <div className="flex justify-between items-center mt-3 w-full">
+                    <div>
+                      <p className="mt-2 text-sm font-semibold">
+                        By: {blog.user.username}
+                      </p>
+                      <p className="mt-1 text-gray-400 text-sm">
+                        {blog.user.email}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold bg-purple-200 px-2 py-1 rounded-lg text-purple-600">{blog.category}</p>
+                    </div>
                   </div>
                 </div>
               </div>
