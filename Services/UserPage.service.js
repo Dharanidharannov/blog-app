@@ -1,4 +1,3 @@
-// UserPage.service.js
 
 import ApiService from './Api.service';
 

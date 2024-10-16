@@ -1,4 +1,3 @@
-// Api.service.js
 
 import axios from 'axios';
 
