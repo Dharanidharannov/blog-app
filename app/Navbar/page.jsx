@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons"; // Import the search icon
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 
 function Navbar() {
