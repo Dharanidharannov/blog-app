@@ -1,24 +1,22 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; 
+import { useRouter } from "next/router";
 import userblogdata from '../../../Services/Profile.service';
-import Navbar from "../../Navbar/page";
+import Navbar from "../../Navbar";
 
 function UserBlogDetails() {
-  const { id } = useParams(); 
+  const router = useRouter();
+  const { id } = router.query; 
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-
     if (id) {
       const getUserDetails = async () => {
         setLoading(true);
 
         try {
-          const blogData = await userblogdata.getUserBlogs(id);
+          const blogData = await userblogdata.getUserBlogs(id); 
           if (blogData && blogData.user) {
             setBlog(blogData);
             setError('');
@@ -54,17 +52,14 @@ function UserBlogDetails() {
         </div>
         <div className="bg-white shadow-lg p-16 rounded-3xl">
           <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
-
           <img
             src={blog.imageUrl}
             alt={blog.title}
             className="w-full h-96 object-cover rounded-lg mb-6 mt-6"
           />
-
           <p className="text-lg font-semibold text-gray-600 mb-2">
             {blog.category}
           </p>
-
           <div
             className="text-lg text-gray-700"
             dangerouslySetInnerHTML={{ __html: blog.content }}

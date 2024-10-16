@@ -25,8 +25,8 @@ function Login() {
       const result = await loginService.loginUser(email, password);
       if (result && result.message === "Login successful") {
         Cookies.set("token", result.token, { expires: 1 });
+        Cookies.set("userId", result.data.user._id, { expires: 1 });
         setSuccessMsg(result.message);
-        const userId = result.data.user._id;
         router.push("/User");
       } else {
         setErrorMsg(result.message);

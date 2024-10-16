@@ -10,11 +10,17 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [userId, setUserId] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
     const token = Cookies.get("token");
+    const savedUserId = Cookies.get("userId");
+    console.log("UserId from cookies:", savedUserId);  
     setIsLoggedIn(!!token);
+    if (savedUserId) {
+      setUserId(savedUserId);  
+    }
   }, []);
 
   const handleSearchClick = () => {
@@ -33,8 +39,10 @@ function Navbar() {
 
   const handleLogout = () => {
     Cookies.remove("token");
+    Cookies.remove("userId");
     setIsLoggedIn(false);
     setShowLogoutModal(false);
+    setUserId(null);
     router.push("/SignIn");
   };
 
@@ -83,7 +91,7 @@ function Navbar() {
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg z-10">
-                    <Link href="/profile" className="block px-4 py-2 hover:bg-gray-200">
+                    <Link href= {`/profile/${userId}`} className="block px-4 py-2 hover:bg-gray-200">
                       My Profile
                     </Link>
                     <Link href="/addblog" className="block px-4 py-2 hover:bg-gray-200">
