@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { faUser, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -90,7 +91,7 @@ function Navbar() {
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg z-10">
-                    <Link href= {`/profile/${userId}`} className="block px-4 py-2 hover:bg-gray-200">
+                    <Link href= {`/Profile/${userId}`} className="block px-4 py-2 hover:bg-gray-200">
                       My Profile
                     </Link>
                     <Link href="/addblog" className="block px-4 py-2 hover:bg-gray-200">
