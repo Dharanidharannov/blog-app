@@ -4,6 +4,8 @@ import axios from 'axios';
 class AddblogService {
   async uploadBlog(blogData) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    
     const blogUpload = {
       url: `${apiUrl}/blogs/upload`,
       method: 'POST',
