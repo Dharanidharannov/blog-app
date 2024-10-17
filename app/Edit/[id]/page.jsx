@@ -51,7 +51,7 @@ function EditBlog() {
 
     try {
       await EditService.updateBlog(id, updatedBlogData);
-      router.push(`/blogs/${id}`); // Redirect to the blog details page after successful update
+      router.push(`/blogs/${id}`); 
     } catch (err) {
       setError("An error occurred while updating the blog.");
     }

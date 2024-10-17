@@ -86,7 +86,7 @@ function BlogPage() {
                 </div>
                 <div className="mt-4 w-full">
                   <h1 className="text-lg font-bold mb-1 text-gray-800">
-                    {blog.title}
+                    {blog.title.replace(/(<([^>]+)>)/gi, "").substring(0, 50)}...
                   </h1>
                   <p className="text-sm text-gray-700 line-clamp-2">
                     {blog.content.replace(/(<([^>]+)>)/gi, "").substring(0, 100)}
