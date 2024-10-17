@@ -43,16 +43,15 @@ function EditBlog() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
- 
-    if (!title.trim()) {
-      setMessage("Title is required");
-      return;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("categories", category); 
+    if (image instanceof File) {
+      formData.append("image", image);
     }
-  
-    if (content.length < 10) {
-      setMessage("Content must be at least 10 characters long");
-      return;
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
     }
   
     if (!category.trim()) {
