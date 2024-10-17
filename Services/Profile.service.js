@@ -11,15 +11,15 @@ class UserPageService {
       });
 
       if (userBlogData) {
-        console.log('Fetched User Blog Data:', userBlogData); // Add logging for debugging
+        console.log('Fetched User Blog Data:', userBlogData); 
         return userBlogData; 
       } else {
         console.error("No data found for the user");
-        return null; // Return null if no data is found
+        return null; 
       }
     } catch (error) {
       console.error("Error in fetching blogs:", error);
-      throw new Error("Failed to fetch user blogs."); // Throw an error instead of returning empty data
+      throw new Error("Failed to fetch user blogs."); 
     }
   }
 }

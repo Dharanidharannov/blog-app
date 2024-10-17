@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import userblogdata from '../../../Services/Profile.service';
 import Navbar from "@/app/Navbar/page";
 import { useParams } from 'next/navigation';  
+import Link from "next/link";
 
 
 function UserBlogDetails() {
@@ -61,10 +62,13 @@ function UserBlogDetails() {
            
             {user && (
               <div className="mb-8">
-                <h2 className="text-2xl font-semibold">User: {user.username}</h2>
+                 <h1 className="text-2xl font-semibold">User information:</h1>
+                <div className="bg-slate-200 rounded-xl w-60 p-5">
+                <h4 className="text-lg ">User: {user.username}</h4>
                 <p className="text-lg text-gray-600">Email: {user.email}</p>
+                </div>
               </div>
-            )}
+            )} 
 
             {blogs.map((blog) => (
               <div key={blog._id} className="bg-white shadow-lg p-16 rounded-3xl mb-6">
@@ -81,6 +85,13 @@ function UserBlogDetails() {
                   className="text-lg text-gray-700"
                   dangerouslySetInnerHTML={{ __html: blog.content }}
                 />
+                <div className="mt-2">
+                <Link href={`/Edit/${blog._id}`} className="bg-black text-white rounded p-2 w-16 mr-96">
+    Edit
+</Link>
+
+                  <button className="bg-red-700 text-white rounded p-2">Delete</button>
+                </div>
               </div>
             ))}
           </div>
