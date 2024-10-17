@@ -14,7 +14,7 @@ function UserBlogDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [blogToDelete, setBlogToDelete] = useState(null); // <-- Define blogToDelete state
+  const [blogToDelete, setBlogToDelete] = useState(null); 
 
   useEffect(() => {
     if (id) {
@@ -37,16 +37,16 @@ function UserBlogDetails() {
   }, [id]);
   
   const handleDeleteClick = (blogId) => {
-    setBlogToDelete(blogId); // <-- Set the selected blog to delete
+    setBlogToDelete(blogId); 
     setShowModal(true);
   };
 
   const confirmDelete = async () => {
     if (blogToDelete) {
       try {
-        const response = await DeleteService.deleteBlog(blogToDelete); // <-- Call the service to delete the blog
+        const response = await DeleteService.deleteBlog(blogToDelete); 
         if (response && !response.error) {
-          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete)); // <-- Filter out the deleted blog
+          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete)); 
           setShowModal(false);
           setBlogToDelete(null);
         } else {
@@ -60,7 +60,7 @@ function UserBlogDetails() {
 
   const closeModal = () => {
     setShowModal(false);
-    setBlogToDelete(null); // <-- Reset the blogToDelete when modal is closed
+    setBlogToDelete(null); 
   };
 
   if (loading) {
