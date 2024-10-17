@@ -1,20 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import SearchService from "../../Services/Search.service";
 import Navbar from "../Navbar/page";
+import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
 
 export default function SearchPage() {
   const [results, setResults] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const router = useRouter();
   
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    setIsLoggedIn(!!token);
     if (query) {
       fetchSearchResults(currentPage);
     }
@@ -32,6 +38,15 @@ export default function SearchPage() {
       setLoading(false);
     }
   };
+
+  const handleBlogClick = (blogId) => {
+    if (isLoggedIn) {
+      router.push(`/BlogDisplay/${blogId}`);
+    } else {
+      router.push("/SignIn");
+    }
+  };
+
 
   const prevPage = () => {
     if (currentPage > 1) {
@@ -60,6 +75,7 @@ export default function SearchPage() {
           results.map((blog) => (
             <div
               key={blog._id}
+              onClick={() => handleBlogClick(blog._id)}
               className="bg-white rounded-2xl overflow-hidden flex flex-col items-center shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer"
             >
               <div className="w-full h-48 overflow-hidden rounded-lg">
