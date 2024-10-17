@@ -15,7 +15,7 @@ class UserPageService {
         return userBlogData; 
       } else {
         console.error("No data found for the user");
-        return null; // Return null if no data is found
+        return null;
       }
     } catch (error) {
       console.error("Error in fetching blogs:", error);
