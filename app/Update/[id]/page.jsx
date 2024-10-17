@@ -14,45 +14,61 @@ function EditBlog() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const blogData = await EditBlogService.getBlogDetails(id);
-        if (blogData) {
-          setTitle(blogData.title);
-          setContent(blogData.content);
-          setCategory(blogData.category);
-          setImage(blogData.imageUrl); 
-        }
-      } catch (error) {
-        setMessage("Error fetching blog details.");
+  const fetchBlog = async () => {
+    try {
+      console.log('Blog ID:', id);
+      const blogData = await EditBlogService.getBlogDetails(id);
+      console.log('Fetched Blog Data:', blogData); 
+      if (blogData) {
+        setTitle(blogData.title);
+        setContent(blogData.content);
+        setCategory(blogData.category);
+        setImage(blogData.imageUrl);
+      } else {
+        throw new Error('Blog data is null');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching blog details:', error.message || error);
+      setMessage("Error fetching blog details: " + (error.message || "Unknown error"));
+    }
+  };
+
+  useEffect(() => {
     fetchBlog();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("categories", category); // Ensure this matches your API requirement
-    if (image instanceof File) {
-      formData.append("image", image);
+  
+ 
+    if (!title.trim()) {
+      setMessage("Title is required");
+      return;
     }
-
-    // Log FormData content for debugging
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+  
+    if (content.length < 10) {
+      setMessage("Content must be at least 10 characters long");
+      return;
     }
-
+  
+    if (!category.trim()) {
+      setMessage("Category is required");
+      return;
+    }
+  
+    const data = {
+      title: title,
+      content: content,
+      category: category,
+     
+    };
+  
     try {
-      const response = await EditBlogService.updateBlog(id, formData);
+      const response = await EditBlogService.updateBlog(id, data);
       setMessage(response.message);
       router.push("/User");
     } catch (error) {
@@ -127,3 +143,4 @@ function EditBlog() {
 }
 
 export default EditBlog;
+
