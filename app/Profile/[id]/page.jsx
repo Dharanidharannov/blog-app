@@ -18,6 +18,7 @@ function UserBlogDetails() {
   const [blogToDelete, setBlogToDelete] = useState(null);
   const router = useRouter(); 
 
+
   useEffect(() => {
     if (id) {
       const getUserDetails = async () => {
@@ -39,16 +40,16 @@ function UserBlogDetails() {
   }, [id]);
   
   const handleDeleteClick = (blogId) => {
-    setBlogToDelete(blogId);
+    setBlogToDelete(blogId); 
     setShowModal(true);
   };
 
   const confirmDelete = async () => {
     if (blogToDelete) {
       try {
-        const response = await DeleteService.deleteBlog(blogToDelete);
+        const response = await DeleteService.deleteBlog(blogToDelete); 
         if (response && !response.error) {
-          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete));
+          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete)); 
           setShowModal(false);
           setBlogToDelete(null);
         } else {
@@ -62,7 +63,7 @@ function UserBlogDetails() {
 
   const closeModal = () => {
     setShowModal(false);
-    setBlogToDelete(null);
+    setBlogToDelete(null); 
   };
 
   if (loading) {
@@ -89,8 +90,11 @@ function UserBlogDetails() {
           <div>
             {user && (
               <div className="mb-8">
-                <h2 className="text-2xl font-semibold">User: {user.username}</h2>
+                 <h1 className="text-2xl font-semibold">User information:</h1>
+                <div className="bg-slate-200 rounded-xl w-60 p-5">
+                <h4 className="text-lg ">User: {user.username}</h4>
                 <p className="text-lg text-gray-600">Email: {user.email}</p>
+                </div>
               </div>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
