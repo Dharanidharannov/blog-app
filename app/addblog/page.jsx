@@ -19,13 +19,15 @@ function Addblog() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('content', content);  
+    formData.append('content', content); 
     formData.append('category', categories);
     formData.append('image', image);
-
+  
+    console.log("Form content:", content); 
+  
     try {
       const response = await AddBlogService.uploadBlog(formData);
       setMessage(response.message);
@@ -34,6 +36,7 @@ function Addblog() {
       setMessage('Error in uploading blog.');
     }
   };
+  
 
   return (
     <div>

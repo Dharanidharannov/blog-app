@@ -4,6 +4,9 @@ import userblogdata from '../../../Services/Profile.service';
 import DeleteService from '../../../Services/Delete.service';
 import Navbar from "@/app/Navbar/page";
 import { useParams } from 'next/navigation';  
+import { ClipLoader } from "react-spinners";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 function UserBlogDetails() {
@@ -11,7 +14,7 @@ function UserBlogDetails() {
   const [blogs, setBlogs] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
- 
+ const [showModal,setShowModal] = useState()
 
   useEffect(() => {
     if (id) {

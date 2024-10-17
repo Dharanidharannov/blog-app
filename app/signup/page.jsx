@@ -1,8 +1,8 @@
 "use client";
-import react,{useState} from "react";
+import react, { useState } from "react";
 import SignupService from "@/Services/Signup.service";
 import { useRouter } from "next/navigation";
-import Image from "next/image"; 
+import Image from "next/image";
 
 function Signup() {
   let [username, setUsername] = useState("");
@@ -40,21 +40,20 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="flex bg-white rounded-lg shadow-lg w-full max-w-4xl">
-       
-        <div className="w-1/2 p-10 bg-blue-100 flex justify-center items-center">
-            <Image src='/images/signup image.jpg' width={800} height={50} className="h-fix w-96"/>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl flex flex-col lg:flex-row">
+ 
+        <div  className="md:w-1/2 p-20 bg-blue-100 hidden md:flex justify-center items-center">
+          <Image src="/images/signup image.jpg" width={500} height={400} className="h-fix w-96" />
         </div>
 
-        <div className="w-1/2 p-10">
+        <div className="lg:w-1/2 p-6 sm:p-10">
           <h2 className="text-2xl font-bold mb-5 text-center">Hello!</h2>
           <p className="text-center mb-10 text-gray-600">
             Welcome to MyblogApp!
           </p>
 
-          <form onSubmit={handlesignup} >
-        
+          <form onSubmit={handlesignup}>
             <div className="mb-4">
               <label className="block text-sm mb-2">Username</label>
               <input
@@ -66,7 +65,6 @@ function Signup() {
               />
             </div>
 
-           
             <div className="mb-4">
               <label className="block text-sm mb-2">Email</label>
               <input
@@ -78,7 +76,6 @@ function Signup() {
               />
             </div>
 
-           
             <div className="mb-4">
               <label className="block text-sm mb-2">Password</label>
               <input
@@ -90,7 +87,6 @@ function Signup() {
               />
             </div>
 
-        
             <button
               type="submit"
               className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
@@ -99,7 +95,6 @@ function Signup() {
             </button>
           </form>
 
-   
           {errormsg && <p className="text-red-600 mt-3">{errormsg}</p>}
           {successmsg && <p className="text-green-600 mt-3">{successmsg}</p>}
 
@@ -116,3 +111,4 @@ function Signup() {
 }
 
 export default Signup;
+
