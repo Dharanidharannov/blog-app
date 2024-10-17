@@ -41,12 +41,10 @@ function EditBlog() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("categories", category); // Ensure this matches your API requirement
+    formData.append("categories", category); 
     if (image instanceof File) {
       formData.append("image", image);
     }
-
-    // Log FormData content for debugging
     for (let pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1]);
     }
