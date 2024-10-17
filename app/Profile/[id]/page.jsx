@@ -4,6 +4,7 @@ import userblogdata from '../../../Services/Profile.service';
 import DeleteService from '../../../Services/Delete.service';
 import Navbar from "@/app/Navbar/page";
 import { useParams } from 'next/navigation';  
+import { useRouter } from 'next/navigation';
 import { ClipLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +15,9 @@ function UserBlogDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [blogToDelete, setBlogToDelete] = useState(null); 
+  const [blogToDelete, setBlogToDelete] = useState(null);
+  const router = useRouter(); 
+
 
   useEffect(() => {
     if (id) {
@@ -94,7 +97,7 @@ function UserBlogDetails() {
                 </div>
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
               {blogs.map((blog) => (
                 <div key={blog._id} className="bg-white rounded-2xl overflow-hidden flex flex-col shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer">
                   <img
@@ -112,7 +115,7 @@ function UserBlogDetails() {
                         {blog.category}
                       </span>
                       <div className="flex space-x-5">
-                        <button className="text-blue-500 hover:text-blue-700">
+                        <button onClick={() => router.push(`/Update/${blog._id}`)}  className="text-blue-500 hover:text-blue-700">
                           <FontAwesomeIcon icon={faEdit} />
                         </button>
                         <button onClick={() => handleDeleteClick(blog._id)} className="text-red-500 hover:text-red-700">
@@ -136,13 +139,13 @@ function UserBlogDetails() {
             <div className="mt-4 flex justify-center space-x-4">
               <button
                 onClick={confirmDelete}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                className="text-red-500 px-4 py-2 rounded-md hover:bg-red-100"
               >
                 Delete
               </button>
               <button
                 onClick={closeModal}
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
+                className="text-gray-700  px-4 py-2 rounded-md hover:bg-gray-200"
               >
                 Cancel
               </button>
