@@ -70,7 +70,7 @@ export default function SearchPage() {
     <div>
       <Navbar />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 px-20 mt-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 px-10 mt-16">
         {results.length > 0 ? (
           results.map((blog) => (
             <div
