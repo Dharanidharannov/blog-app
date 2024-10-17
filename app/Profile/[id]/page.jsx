@@ -8,13 +8,13 @@ import { ClipLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-
 function UserBlogDetails() {
   const { id } = useParams();  
   const [blogs, setBlogs] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
- const [showModal,setShowModal] = useState()
+  const [showModal, setShowModal] = useState(false);
+  const [blogToDelete, setBlogToDelete] = useState(null); // <-- Define blogToDelete state
 
   useEffect(() => {
     if (id) {
@@ -37,16 +37,16 @@ function UserBlogDetails() {
   }, [id]);
   
   const handleDeleteClick = (blogId) => {
-    setBlogToDelete(blogId);
+    setBlogToDelete(blogId); // <-- Set the selected blog to delete
     setShowModal(true);
   };
 
   const confirmDelete = async () => {
     if (blogToDelete) {
       try {
-        const response = await DeleteService.deleteBlog(blogToDelete);
+        const response = await DeleteService.deleteBlog(blogToDelete); // <-- Call the service to delete the blog
         if (response && !response.error) {
-          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete));
+          setBlogs(blogs.filter((blog) => blog._id !== blogToDelete)); // <-- Filter out the deleted blog
           setShowModal(false);
           setBlogToDelete(null);
         } else {
@@ -60,7 +60,7 @@ function UserBlogDetails() {
 
   const closeModal = () => {
     setShowModal(false);
-    setBlogToDelete(null);
+    setBlogToDelete(null); // <-- Reset the blogToDelete when modal is closed
   };
 
   if (loading) {
