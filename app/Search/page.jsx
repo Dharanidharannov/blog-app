@@ -1,32 +1,39 @@
-"use client";
-import { useEffect, useState } from "react";
+"use client"; 
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import SearchService from "../../Services/Search.service";
 import Navbar from "../Navbar/page";
 import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
+import Image from "next/image";
 
-export default function SearchPage() {
+export const dynamic = "force-dynamic"; 
+
+function SearchPage() {
   const [results, setResults] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [query, setQuery] = useState("");
   const router = useRouter();
-  
+
   const searchParams = useSearchParams();
-  const query = searchParams.get("query");
 
   useEffect(() => {
     const token = Cookies.get("token");
     setIsLoggedIn(!!token);
-    if (query) {
-      fetchSearchResults(currentPage);
-    }
-  }, [query, currentPage]);
 
-  const fetchSearchResults = async (page) => {
+    const searchQuery = searchParams.get("query");
+    setQuery(searchQuery); 
+
+    if (searchQuery) {
+      fetchSearchResults(currentPage, searchQuery);
+    }
+  }, [searchParams, currentPage]);
+
+  const fetchSearchResults = async (page, query) => { 
     setLoading(true);
     try {
       const data = await SearchService.fetchSearchResults(query, page);
@@ -49,13 +56,13 @@ export default function SearchPage() {
 
   const prevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
+      setCurrentPage((prev) => prev - 1);
     }
   };
 
   const nextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
+      setCurrentPage((prev) => prev + 1);
     }
   };
 
@@ -70,7 +77,6 @@ export default function SearchPage() {
   return (
     <div>
       <Navbar />
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-4 sm:px-6 lg:px-10 mt-10">
         {results.length > 0 ? (
           results.map((blog) => (
@@ -80,9 +86,11 @@ export default function SearchPage() {
               className="bg-white rounded-xl overflow-hidden flex flex-col items-center shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer"
             >
               <div className="w-full h-40 sm:h-48 overflow-hidden rounded-lg">
-                <img
+                <Image 
                   src={blog.imageUrl}
                   alt={blog.title}
+                  width={500} 
+                  height={300} 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -109,7 +117,7 @@ export default function SearchPage() {
           <p className="text-center col-span-full">No blogs found.</p>
         )}
       </div>
-      
+
       <div className="flex justify-center items-center space-x-4 my-8">
         <button
           onClick={prevPage}
@@ -130,5 +138,13 @@ export default function SearchPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function SearchWrapper() {
+  return (
+    <Suspense fallback={<div>Loading search results...</div>}>
+      <SearchPage />
+    </Suspense>
   );
 }
