@@ -18,7 +18,6 @@ function UserBlogDetails() {
   const [blogToDelete, setBlogToDelete] = useState(null);
   const router = useRouter(); 
 
-
   useEffect(() => {
     if (id) {
       const getUserDetails = async () => {
@@ -83,30 +82,33 @@ function UserBlogDetails() {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto p-4 md:p-8">
         {blogs.length === 0 ? (
           <div>No blogs available for this user.</div>
         ) : (
           <div>
             {user && (
               <div className="mb-8">
-                 <h1 className="text-2xl font-semibold">User information:</h1>
-                <div className="bg-slate-200 rounded-xl w-60 p-5">
-                <h4 className="text-lg ">User: {user.username}</h4>
-                <p className="text-lg text-gray-600">Email: {user.email}</p>
+                <h1 className="text-2xl font-semibold">User information:</h1>
+                <div className="bg-slate-200 rounded-xl p-5 w-72 md:w-96">
+                  <h4 className="text-lg ">User: {user.username}</h4>
+                  <p className="text-lg text-gray-600">Email: {user.email}</p>
                 </div>
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
+           
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {blogs.map((blog) => (
-                <div key={blog._id} className="bg-white rounded-2xl overflow-hidden flex flex-col shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer">
+                <div key={blog._id} className="bg-white rounded-2xl overflow-hidden flex flex-col shadow-sm p-4 transition-transform hover:scale-105 cursor-pointer">
                   <img
                     src={blog.imageUrl}
                     alt={blog.title}
                     className="w-full h-48 object-cover rounded-xl"
                   />
                   <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{blog.title.replace(/(<([^>]+)>)/gi, "").substring(0, 50)}...</h3>
+                    <h3 className="text-xl font-semibold mb-2">
+                      {blog.title.replace(/(<([^>]+)>)/gi, "").substring(0, 50)}...
+                    </h3>
                     <p className="text-sm text-gray-600 line-clamp-2">
                       {blog.content.replace(/(<([^>]+)>)/gi, "").substring(0, 100)}...
                     </p>
@@ -115,7 +117,7 @@ function UserBlogDetails() {
                         {blog.category}
                       </span>
                       <div className="flex space-x-5">
-                        <button onClick={() => router.push(`/Update/${blog._id}`)}  className="text-blue-500 hover:text-blue-700">
+                        <button onClick={() => router.push(`/Update/${blog._id}`)} className="text-blue-500 hover:text-blue-700">
                           <FontAwesomeIcon icon={faEdit} />
                         </button>
                         <button onClick={() => handleDeleteClick(blog._id)} className="text-red-500 hover:text-red-700">
@@ -131,6 +133,7 @@ function UserBlogDetails() {
         )}
       </div>
 
+      
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-xs">
@@ -145,7 +148,7 @@ function UserBlogDetails() {
               </button>
               <button
                 onClick={closeModal}
-                className="text-gray-700  px-4 py-2 rounded-md hover:bg-gray-200"
+                className="text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200"
               >
                 Cancel
               </button>
@@ -158,3 +161,4 @@ function UserBlogDetails() {
 }
 
 export default UserBlogDetails;
+

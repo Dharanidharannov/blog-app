@@ -39,23 +39,24 @@ function Addblog() {
   return (
     <div>
       <Navbar />
-      <div className='container mx-auto py-16 px-4 md:px-60 '>
-        <div className="p-5 md:p-10">
+      <div className='container mx-auto py-10 px-4 md:px-20 lg:px-40'>
+        <div className="p-5 md:p-10 bg-white shadow-lg rounded-2xl">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="font-bold">Title:</label>
               <input 
-                className="mt-2 rounded border border-gray-300 w-full p-2"
+                className="mt-2 rounded border border-gray-300 w-full p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 type="text" 
                 value={title} 
                 onChange={(e) => setTitle(e.target.value)} 
                 required 
               />
             </div>
+
             <div className="mb-4">
               <label className="font-bold">Categories:</label>
               <select 
-                className="mt-2 rounded border border-gray-300 w-full p-2"
+                className="mt-2 rounded border border-gray-300 w-full p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={categories} 
                 onChange={(e) => setCategories(e.target.value)} 
                 required
@@ -72,7 +73,7 @@ function Addblog() {
             <div className="mb-4">
               <label className="font-bold">Content:</label>
               <ReactQuill
-                className="mt-2 mb-4"
+                className="mt-2 mb-4 h-40 lg:h-60"
                 value={content} 
                 onChange={setContent}  
                 required 
@@ -81,16 +82,21 @@ function Addblog() {
             </div>
 
             <div className="mb-4">
-              <label className="font-bold mr-2">Image:</label>
+              <label className="font-bold">Image:</label>
               <input 
                 type="file" 
-                className="mt-2 border border-gray-300 p-2 rounded w-full" 
+                className="mt-2 border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" 
                 onChange={(e) => setImage(e.target.files[0])} 
                 required 
               />
             </div>
 
-            <button type="submit" className="bg-black hover:bg-gray-500 rounded-xl px-4 py-2 text-white transition duration-200">Submit</button>
+            <button 
+              type="submit" 
+              className="bg-black hover:bg-gray-700 rounded-xl px-4 py-2 text-white transition duration-200 w-full md:w-auto"
+            >
+              Submit
+            </button>
           </form>
           {message && <p className="mt-4 text-center text-red-500">{message}</p>}
         </div>
@@ -100,3 +106,4 @@ function Addblog() {
 }
 
 export default Addblog;
+

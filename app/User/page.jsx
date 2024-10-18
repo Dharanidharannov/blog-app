@@ -69,13 +69,13 @@ function BlogPage() {
           <ClipLoader color="#3b82f6" size={50} />
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 px-10 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-10 mt-16">
           {blogs.length > 0 ? (
             blogs.map((blog) => (
               <div
                 key={blog._id}
                 onClick={() => handleBlogClick(blog._id)}
-                className="bg-white rounded-2xl overflow-hidden flex flex-col items-center shadow-sm p-4 transform transition-all hover:scale-105 cursor-pointer"
+                className="bg-white rounded-lg overflow-hidden flex flex-col items-center shadow-md p-4 transform transition-all hover:scale-105 cursor-pointer"
               >
                 <div className="w-full h-48 overflow-hidden rounded-lg">
                   <img
@@ -85,7 +85,7 @@ function BlogPage() {
                   />
                 </div>
                 <div className="mt-4 w-full">
-                  <h1 className="text-lg font-bold mb-1 text-gray-800">
+                  <h1 className="text-lg font-bold mb-1 text-gray-800 truncate">
                     {blog.title.replace(/(<([^>]+)>)/gi, "").substring(0, 50)}...
                   </h1>
                   <p className="text-sm text-gray-700 line-clamp-2">
@@ -117,17 +117,17 @@ function BlogPage() {
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className={`px-2 py-1 text-white bg-blue-400 rounded-lg ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           Previous
         </button>
-        <span>
+        <span className="text-lg font-semibold">
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className={`px-2 py-1 text-white bg-blue-400 rounded-lg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           Next
         </button>
@@ -137,3 +137,4 @@ function BlogPage() {
 }
 
 export default BlogPage;
+
