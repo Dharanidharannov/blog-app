@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { ClipLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 function UserBlogDetails() {
   const { id } = useParams();  
@@ -100,9 +101,10 @@ function UserBlogDetails() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {blogs.map((blog) => (
                 <div key={blog._id} className="bg-white rounded-2xl overflow-hidden flex flex-col shadow-sm p-4 transition-transform hover:scale-105 cursor-pointer">
-                  <img
+                  <Image
                     src={blog.imageUrl}
                     alt={blog.title}
+                    width={200} height={100}
                     className="w-full h-48 object-cover rounded-xl"
                   />
                   <div className="p-4">

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "../Navbar/page";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -78,9 +79,10 @@ function BlogPage() {
                 className="bg-white rounded-lg overflow-hidden flex flex-col items-center shadow-md p-4 transform transition-all hover:scale-105 cursor-pointer"
               >
                 <div className="w-full h-48 overflow-hidden rounded-lg">
-                  <img
+                  <Image
                     src={blog.imageUrl}
                     alt={blog.title}
+                    height={100} width={200}
                     className="w-full h-full object-cover"
                   />
                 </div>

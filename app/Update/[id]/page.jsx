@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import EditBlogService from "@/Services/Update.service";
 import Navbar from "../../Navbar/page";
+import Image from "next/image";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -28,7 +29,7 @@ function EditBlog() {
         setContent(blogData.content);
         setCategory(blogData.category);
         setImage(blogData.imageUrl);
-        setImagePreview(blogData.imageUrl); // Set initial image preview
+        setImagePreview(blogData.imageUrl); 
       } else {
         throw new Error("Blog data is null");
       }
@@ -50,7 +51,7 @@ function EditBlog() {
       setImage(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result); // Set image preview
+        setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -140,9 +141,10 @@ function EditBlog() {
                 onChange={handleImageChange}
               />
               {imagePreview && (
-                <img
+                <Image
                   src={imagePreview}
                   alt="Preview"
+                  width={200} height={100}
                   className="mt-4 w-full h-48 object-cover rounded"
                 />
               )}

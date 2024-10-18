@@ -48,7 +48,8 @@ function Login() {
 
         <div className="md:w-1/2 p-20">
           <h2 className="text-2xl font-bold mb-5 text-center">Hello Again!</h2>
-          <p className="text-center mb-10 text-gray-600">Welcome back, you've been missed!</p>
+          <p className="text-center mb-10 text-gray-600">Welcome back, you&apos;ve been missed!</p>
+
 
           <form onSubmit={handleLogin}>
             <div className="mb-4">
@@ -93,7 +94,7 @@ function Login() {
           {successMsg && <p className="text-green-600 mt-3">{successMsg}</p>}
 
           <p className="text-center mt-5">
-            Don’t have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="/signup" className="text-blue-500">Sign Up!</a>
           </p>
         </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BlogDisplayService from "../../../Services/BlogDisplay.service";
 import Navbar from "../../Navbar/page";
+import Image from "next/image";
 
 function BlogDetails() {
   const { id } = useParams();
@@ -48,9 +49,10 @@ function BlogDetails() {
             {blog.title}
           </h1>
 
-          <img
+          <Image
             src={blog.imageUrl}
             alt={blog.title}
+            width={500} height={300}
             className="w-full h-64 md:h-96 lg:h-[500px] object-cover rounded-lg mb-6"
           />
 
