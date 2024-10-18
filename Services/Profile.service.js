@@ -10,8 +10,7 @@ class UserPageService {
         method: 'GET',
       });
 
-      if (userBlogData) {
-        console.log('Fetched User Blog Data:', userBlogData); 
+      if (userBlogData) { 
         return userBlogData; 
       } else {
         console.error("No data found for the user");

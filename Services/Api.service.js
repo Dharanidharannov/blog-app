@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 class ApiService {
@@ -6,7 +5,7 @@ class ApiService {
     url, 
     method = 'GET', 
     headers = {}, 
-    body 
+    data = null 
   }) {
     try {
       const config = {
@@ -14,17 +13,20 @@ class ApiService {
         url: `${process.env.NEXT_PUBLIC_API_URL}${url}`,
         headers: {
           ...headers,
-          'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        withCredentials: true,  
       };
 
-      if (body) {
-        config.data = body; 
+      if (data) {
+        if (data instanceof FormData) {
+          config.headers['Content-Type'] = 'multipart/form-data';
+        } else {
+          config.headers['Content-Type'] = 'application/json';
+        }
+        config.data = data;
       }
 
       const response = await axios(config);
-      
       if (response.status === 200 && response.data) {
         return response.data;
       } else {
@@ -33,6 +35,7 @@ class ApiService {
       }
     } catch (error) {
       console.error('API call error:', error);
+      throw error;
     }
   }
 }
