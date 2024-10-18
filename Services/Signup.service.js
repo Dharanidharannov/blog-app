@@ -14,8 +14,6 @@ class SignupService {
 
         try {
             const res = await axios.post(`${signupUrl}/auth/register`, signupData);
-            console.log('API Response:', res);
-
             if (res.data && res.status === 201) {
                 return {
                     message: 'User registered successfully',

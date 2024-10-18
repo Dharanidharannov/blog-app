@@ -14,15 +14,15 @@ function EditBlog() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
+  const [successmsg,setSuccessmsg] = useState('');
   const router = useRouter();
 
   const fetchBlog = async () => {
     try {
       console.log('Blog ID:', id);
-      const blogData = await EditBlogService.getBlogDetails(id);
-      console.log('Fetched Blog Data:', blogData); 
+      const blogData = await EditBlogService.getBlogDetails(id); 
       if (blogData) {
         setTitle(blogData.title);
         setContent(blogData.content);
@@ -38,38 +38,28 @@ function EditBlog() {
   };
 
   useEffect(() => {
-    fetchBlog();
+    if (id) fetchBlog();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("categories", category); 
+    formData.append("category", category);
     if (image instanceof File) {
       formData.append("image", image);
     }
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
-  
-    if (!category.trim()) {
-      setMessage("Category is required");
-      return;
-    }
-  
-    const data = {
-      title: title,
-      content: content,
-      category: category,
-     
-    };
   
     try {
-      const response = await EditBlogService.updateBlog(id, data);
-      setMessage(response.message);
-      router.push("/User");
+      const response = await EditBlogService.updateBlog(id, formData);
+      if (response) {
+        setSuccessmsg(response.message || "Blog updated successfully");
+        router.push("/User");
+      } else {
+        throw new Error("No data received from the API.");
+      }
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred while updating the blog.";
       setMessage("Error updating blog: " + errorMessage);
@@ -135,6 +125,7 @@ function EditBlog() {
             </button>
           </form>
           {message && <p className="mt-4 text-center text-red-500">{message}</p>}
+          {successmsg && <p className="text-green-600 text-center mt-4">{successmsg}</p>}
         </div>
       </div>
     </div>
@@ -142,4 +133,3 @@ function EditBlog() {
 }
 
 export default EditBlog;
-

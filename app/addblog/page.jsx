@@ -26,8 +26,6 @@ function Addblog() {
     formData.append('category', categories);
     formData.append('image', image);
   
-    console.log("Form content:", content); 
-  
     try {
       const response = await AddBlogService.uploadBlog(formData);
       setMessage(response.message);
